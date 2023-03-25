@@ -2,39 +2,44 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 const methodOverride = require('method-override');
+const pokemons = require('./pokemon')
+// console.log(pokemons)
 
 app.set('view engine', 'ejs');
 app.set(methodOverride('_method'));
 
-app.get('/pokemon', (res, req) => {
-    res.render('index.ejs')
+
+
+
+app.get('/pokemon', (req, res) => {
+    res.render('index.ejs', {pokemons})
 })
 
-app.get('pokemon/new', (res, req) => {
+app.get('pokemon/new', (req, res) => {
     res.render('new.ejs')
 })
 
-app.get('pokemon/:id', (res, req) => {
+app.get('pokemon/:id', (req, res) => {
     res.render('show.ejs')
 })
 
-app.get('pokemon/:id/edit', (res, req) => {
+app.get('pokemon/:id/edit', (req, res) => {
     res.render('edit.ejs')
 })
 
-app.post('pokemon', (res, req) => {
+app.post('pokemon', (req, res) => {
     res.redirect('/pokemon')
 })
 
-app.put('pokemon/:id', (res, req) => {
+app.put('pokemon/:id', (req, res) => {
     res.redirect(`/pokemon/${req.params.id}`)
 })
 
-app.get('pokemon/:id/destroy', (res, req) => {
+app.get('pokemon/:id/destroy', (req, res) => {
     res.render('destroy.ejs')
 })
 
-app.delete('pokemon/:id', (res, req) => {
+app.delete('pokemon/:id', (req, res) => {
     res.redirect('/pokemon')
 })
 
